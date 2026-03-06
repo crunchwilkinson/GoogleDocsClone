@@ -25,7 +25,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.SignIn.RequireConfirmedEmail = false;
     })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IDocumentsService, DocumentsService>();
