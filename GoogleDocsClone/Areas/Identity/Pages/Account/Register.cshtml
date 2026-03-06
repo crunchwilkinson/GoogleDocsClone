@@ -1,0 +1,45 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="identity-shell">
+    <div class="identity-card">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
+                <circle cx="12" cy="8" r="3" stroke="#1a3a6b" stroke-width="2" fill="none"/>
+                <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#1a3a6b" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="8" r="1.5" fill="#264e8a"/>
+            </svg>
+        </div>
+        <h1 class="identity-title">Register</h1>
+        <p class="identity-subtitle">Create a new account.</p>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-identity-primary">Register</button>
+            <div class="identity-links">
+                <a asp-page="./Login">Already have an account? Log in</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

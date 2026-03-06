@@ -1,0 +1,72 @@
+@model GoogleDocsClone.Models.Document
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="docs-hero docs-hero-editor mb-5">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="docs-title mb-2">Create Document</h1>
+            <p class="docs-subtitle">Start writing something new.</p>
+        </div>
+        <a asp-action="Index" class="btn btn-editor-hero">← Back to Documents</a>
+    </div>
+</div>
+
+<div class="editor-page-layout">
+    <section class="editor-shell">
+    <div class="editor-card">
+        <div class="editor-card-inner">
+            <form asp-action="Create" class="editor-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="editor-title-group mb-4">
+                    <input asp-for="Title" class="form-control editor-title-input" value="Untitled Document" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="editor-area-group mb-4">
+                    <textarea id="tiny" class="editor-content-input" asp-for="Content"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="editor-actions">
+                    <input type="submit" value="Create Document" class="btn btn-editor-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+    <aside class="editor-sidebar">
+        <div class="sidebar-card">
+            <h5 class="sidebar-card-title">Quick Tips</h5>
+            <ul class="sidebar-tips">
+                <li>Use the toolbar to format your text</li>
+                <li>Add images, tables, and media</li>
+                <li>Your document saves when you click Create</li>
+            </ul>
+        </div>
+    </aside>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.tiny.cloud/1/lyd6jl029a6qoowdq0hs40f5485e8o40sr4c5v8babvar66n/tinymce/8/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea#tiny",
+            plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
+            toolbar: "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
+            elementpath: false,
+            min_height: 500,
+            skin: "oxide",
+            content_css: "default",
+            toolbar_sticky: true,
+            toolbar_sticky_offset: 56,
+            body_class: "tinymce-body",
+            content_style: "body { font-family: 'Manrope', 'Segoe UI', sans-serif; font-size: 15px; color: #202124; line-height: 1.7; padding: 12px 16px; } p { margin: 0 0 0.8em 0; }"
+        });
+    </script>
+}

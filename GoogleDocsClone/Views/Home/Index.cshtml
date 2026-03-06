@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<!-- Hero Section -->
+<div class="docs-content-area">
+    <div class="docs-hero mb-5">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">Document Platform</span>
+                <h1 class="docs-title mb-2">Build Your Ideas<br/>Together.</h1>
+                <p class="docs-subtitle">A fast, secure, and modern way to create, edit, and manage your documents from anywhere in the world.</p>
+            </div>
+            <div class="hero-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="9" y1="13" x2="15" y2="13"></line>
+                    <line x1="9" y1="17" x2="13" y2="17"></line>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <section class="home-cta-section">
+        <div class="d-flex gap-3 flex-wrap">
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-lg btn-identity-primary px-4">
+                Get Started for Free
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg btn-home-secondary px-4">
+                Login
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="recent-section mt-5">
+        <div class="section-header">
+            <h3 class="section-title">Why Google Docs Clone?</h3>
+            <p class="section-subtitle">Everything you need for document creation</p>
+        </div>
+        <div class="home-features-grid">
+            <div class="home-feature-card">
+                <div class="home-feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                    </svg>
+                </div>
+                <h4 class="home-feature-title">Rich Text Editing</h4>
+                <p class="home-feature-desc">Format your documents exactly how you want them with our powerful TinyMCE editor.</p>
+            </div>
+            <div class="home-feature-card">
+                <div class="home-feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h4 class="home-feature-title">Secure Storage</h4>
+                <p class="home-feature-desc">Your documents are tied directly to your account. No one else can access them.</p>
+            </div>
+            <div class="home-feature-card">
+                <div class="home-feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <h4 class="home-feature-title">Blazing Fast</h4>
+                <p class="home-feature-desc">Built on the latest .NET Core architecture so your workspace is always snappy and responsive.</p>
+            </div>
+        </div>
+    </section>
+</div>

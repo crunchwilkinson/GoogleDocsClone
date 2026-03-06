@@ -1,0 +1,86 @@
+@model GoogleDocsClone.Models.Document
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="docs-hero docs-hero-editor mb-5">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="docs-title mb-2">Edit Document</h1>
+            <p class="docs-subtitle">Make changes to your document.</p>
+        </div>
+        <a asp-action="Index" class="btn btn-editor-hero">← Back to Documents</a>
+    </div>
+</div>
+
+<div class="editor-page-layout">
+    <section class="editor-shell">
+    <div class="editor-card">
+        <div class="editor-card-inner">
+            <form asp-action="Edit" class="editor-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+                
+                <div class="editor-title-group mb-4">
+                    <input asp-for="Title" class="form-control editor-title-input" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="editor-area-group mb-4">
+                    <textarea id="tiny" class="editor-content-input" asp-for="Content"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="editor-actions">
+                    <input type="submit" value="Save Changes" class="btn btn-editor-primary" />
+                    <button type="submit" form="delete-form" class="btn btn-editor-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 6px;">
+                            <polyline points="3 6 5 6 21 6">
+                            </polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>Delete Document
+                    </button>
+                </div>
+            </form>
+            <form id="delete-form" asp-action="Delete" method="post" class="editor-delete-inline" onsubmit="return confirm('Are you sure you want to permanently delete this document?');">
+                <input type="hidden" asp-for="Id" />
+            </form>
+            
+
+        </div>
+    </div>
+</section>
+
+    <aside class="editor-sidebar">
+        <div class="sidebar-card">
+            <h5 class="sidebar-card-title">Document Info</h5>
+            <ul class="sidebar-tips">
+                <li>Use the toolbar to format your text</li>
+                <li>Add images, tables, and media</li>
+                <li>Click Save Changes when you're done</li>
+            </ul>
+        </div>
+    </aside>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.tiny.cloud/1/lyd6jl029a6qoowdq0hs40f5485e8o40sr4c5v8babvar66n/tinymce/8/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea#tiny",
+            plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
+            toolbar: "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
+            elementpath: false,
+            min_height: 500,
+            skin: "oxide",
+            content_css: "default",
+            toolbar_sticky: true,
+            toolbar_sticky_offset: 56,
+            body_class: "tinymce-body",
+            content_style: "body { font-family: 'Manrope', 'Segoe UI', sans-serif; font-size: 15px; color: #202124; line-height: 1.7; padding: 12px 16px; } p { margin: 0 0 0.8em 0; }"
+        });
+    </script>
+}
