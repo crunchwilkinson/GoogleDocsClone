@@ -18,7 +18,10 @@ bld/
 .vs/
 
 # Visual Studio Code
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 *.code-workspace
 
 # User-specific files
@@ -40,11 +43,6 @@ TestResults/
 *.trx
 *.coverage
 
-# Local configuration
-appsettings.*.json
-!appsettings.json
-!appsettings.Development.json
-
 # User secrets
 secrets.json
 *.secrets.json
@@ -61,9 +59,9 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
-
+cd "/Users/tristanwilkinson/VS Code Projects/GoogleDocsClone/GoogleDocsClone"cd "/Users/tristanwilkinson/VS Code Projects/GoogleDocsClone/GoogleDocsClone"
 # OS files
-.DS_Store
+**/.DS_Store
 Thumbs.db
 
 # Package files
@@ -88,4 +86,4 @@ tmp/
 
 # Docker
 docker-compose.override.yml
-.dockerignore
+.vscode/settings.json
