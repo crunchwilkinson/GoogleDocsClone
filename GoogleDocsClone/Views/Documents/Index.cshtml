@@ -103,7 +103,7 @@
                         </div>
                         <div>
                             <h4 class="home-feature-title">@item.Title</h4>
-                            <p class="home-feature-desc">Modified @item.UpdatedAt.ToString("MM/dd/yy HH:mm")</p>
+                            <p class="home-feature-desc">Modified @item.UpdatedAt.AddHours(2).ToString("MM/dd/yy HH:mm")</p>
                         </div>
                     </a>
                 }
