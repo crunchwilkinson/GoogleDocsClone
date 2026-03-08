@@ -1510,4 +1510,41 @@ a.home-feature-card {
   .privacy-section {
     padding: 1.5rem 1.75rem;
   }
+
+ /* Mobile Navbar Alignment Fixes */
+@media (max-width: 575.98px) {
+  /* Ensure the toggle and brand sit nicely on the top row */
+  .navbar-inner {
+    justify-content: space-between;
+  }
+
+  /* Override the ms-3 margin from the HTML to align "Home" left */
+  .navbar-nav.ms-3 {
+    margin-left: 0 !important;
+  }
+
+  /* Adjust padding for the main nav links for better touch targets */
+  .navbar-collapse .nav-link {
+    padding: 0.6rem 0 !important;
+  }
+
+  /* Stack the Login/Register links and align them left */
+  .navbar-user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Adds a subtle separator line */
+    width: 100%;
+  }
+
+  /* Clean up the padding on the user links */
+  .navbar-user a {
+    padding: 0.6rem 0;
+    width: 100%;
+    display: block;
+  }
+} 
+
 }
