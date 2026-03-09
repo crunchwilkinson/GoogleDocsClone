@@ -54,6 +54,7 @@ namespace GoogleDocsClone.Controllers
             if (ModelState.IsValid)
             {
                 await _documentsService.CreateDocumentAsync(doc, userId);
+                TempData["SuccessMessage"] = "Document created successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(doc);
@@ -120,6 +121,7 @@ namespace GoogleDocsClone.Controllers
                         throw;
                     }
                 }
+                TempData["SuccessMessage"] = "Document updated successfully!";
                 return RedirectToAction(nameof(Index));
             }
            

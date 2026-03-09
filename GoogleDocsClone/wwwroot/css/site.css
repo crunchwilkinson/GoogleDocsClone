@@ -13,7 +13,11 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -34,7 +38,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -466,12 +475,14 @@ button,
   margin: 0;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+.form-floating>.form-control-plaintext::placeholder,
+.form-floating>.form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+.form-floating>.form-control-plaintext:focus::placeholder,
+.form-floating>.form-control:focus::placeholder {
   text-align: start;
 }
 
@@ -622,9 +633,12 @@ button,
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -1215,7 +1229,7 @@ a.home-feature-card {
   background: #fff;
   border: 1px solid rgba(26, 58, 107, 0.1);
   border-radius: 20px;
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(15, 40, 71, 0.12),
     0 2px 8px rgba(0, 0, 0, 0.05);
   position: relative;
@@ -1259,13 +1273,13 @@ a.home-feature-card {
   box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.08);
 }
 
-.identity-card .form-floating > label {
+.identity-card .form-floating>label {
   color: #5f6368;
   padding: 1rem 0.875rem;
 }
 
-.identity-card .form-floating > .form-control:focus ~ label,
-.identity-card .form-floating > .form-control:not(:placeholder-shown) ~ label {
+.identity-card .form-floating>.form-control:focus~label,
+.identity-card .form-floating>.form-control:not(:placeholder-shown)~label {
   color: #1a3a6b;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
@@ -1502,49 +1516,67 @@ a.home-feature-card {
   color: #1a3a6b;
 }
 
+#toast-container>.toast-success {
+  background-color: #0d47a1 !important;
+  /* Change this hex code to your app's exact blue! */
+  opacity: 1 !important;
+  /* Makes it 100% solid */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  /* Adds a nice modern shadow */
+  border-radius: 8px !important;
+}
+
+/* Keep it solid even when hovered */
+#toast-container>.toast-success:hover {
+  opacity: 1 !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
 @media (max-width: 768px) {
   .privacy-content {
     max-width: 100%;
   }
-  
+
   .privacy-section {
     padding: 1.5rem 1.75rem;
   }
 
- /* Mobile Navbar Alignment Fixes */
-@media (max-width: 575.98px) {
-  /* Ensure the toggle and brand sit nicely on the top row */
-  .navbar-inner {
-    justify-content: space-between;
-  }
+  /* Mobile Navbar Alignment Fixes */
+  @media (max-width: 575.98px) {
 
-  /* Override the ms-3 margin from the HTML to align "Home" left */
-  .navbar-nav.ms-3 {
-    margin-left: 0 !important;
-  }
+    /* Ensure the toggle and brand sit nicely on the top row */
+    .navbar-inner {
+      justify-content: space-between;
+    }
 
-  /* Adjust padding for the main nav links for better touch targets */
-  .navbar-collapse .nav-link {
-    padding: 0.6rem 0 !important;
-  }
+    /* Override the ms-3 margin from the HTML to align "Home" left */
+    .navbar-nav.ms-3 {
+      margin-left: 0 !important;
+    }
 
-  /* Stack the Login/Register links and align them left */
-  .navbar-user {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Adds a subtle separator line */
-    width: 100%;
-  }
+    /* Adjust padding for the main nav links for better touch targets */
+    .navbar-collapse .nav-link {
+      padding: 0.6rem 0 !important;
+    }
 
-  /* Clean up the padding on the user links */
-  .navbar-user a {
-    padding: 0.6rem 0;
-    width: 100%;
-    display: block;
+    /* Stack the Login/Register links and align them left */
+    .navbar-user {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      /* Adds a subtle separator line */
+      width: 100%;
+    }
+
+    /* Clean up the padding on the user links */
+    .navbar-user a {
+      padding: 0.6rem 0;
+      width: 100%;
+      display: block;
+    }
   }
-} 
 
 }
