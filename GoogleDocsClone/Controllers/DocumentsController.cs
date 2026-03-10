@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using GoogleDocsClone.Data;
 using GoogleDocsClone.Models;
 using GoogleDocsClone.Services;
+using Microsoft.CodeAnalysis.Elfie.Model.Strings;
 
 namespace GoogleDocsClone.Controllers
 {
@@ -17,17 +18,19 @@ namespace GoogleDocsClone.Controllers
     public class DocumentsController : Controller
     {
         private readonly IDocumentsService _documentsService;
+        private readonly ILogger<DocumentsController> _logger;
 
-        public DocumentsController(IDocumentsService documentsService)
+        public DocumentsController(IDocumentsService documentsService, ILogger<DocumentsController> logger)
         {
             _documentsService = documentsService;
+            _logger = logger;
         }
 
         // GET: Docs
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var documents = await _documentsService.GetDocumentsForUserAsync(userId!);
+            var userId = GetCurrentUserId();
+            var documents = await _documentsService.GetDocumentsForUserAsync(userId);
             return View(documents);
         }
 
@@ -45,7 +48,8 @@ namespace GoogleDocsClone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Content")] Document doc)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = GetCurrentUserId();
+
             if (string.IsNullOrEmpty(userId))
             {
                 return Unauthorized();
@@ -54,6 +58,7 @@ namespace GoogleDocsClone.Controllers
             if (ModelState.IsValid)
             {
                 await _documentsService.CreateDocumentAsync(doc, userId);
+                _logger.LogInformation("User {UserId} successfully created a new document (Title: {Title}).", userId, doc.Title);
                 TempData["SuccessMessage"] = "Document created successfully!";
                 return RedirectToAction(nameof(Index));
             }
@@ -76,6 +81,7 @@ namespace GoogleDocsClone.Controllers
 
             if (doc.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
             {
+                _logger.LogWarning("SECURITY: User {UserId} attempted to access/modify Document {DocumentId} which belongs to another user.", User.FindFirstValue(ClaimTypes.NameIdentifier), id);
                 return NotFound();
             }
 
@@ -94,7 +100,8 @@ namespace GoogleDocsClone.Controllers
                 return NotFound();
             }
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = GetCurrentUserId();
+
             if (string.IsNullOrEmpty(userId))
             {
                 return Unauthorized();
@@ -110,8 +117,9 @@ namespace GoogleDocsClone.Controllers
                         return NotFound();
                     }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
+                    _logger.LogError(ex, "Concurrency error occurred while User {UserId} was updating Document {DocumentId}.", userId, doc.Id);
                     if (!await DocExists(doc.Id))
                     {
                         return NotFound();
@@ -121,6 +129,7 @@ namespace GoogleDocsClone.Controllers
                         throw;
                     }
                 }
+                _logger.LogInformation("User {UserId} successfully updated Document {DocumentId} (Title: {Title}).", userId, doc.Id, doc.Title);
                 TempData["SuccessMessage"] = "Document updated successfully!";
                 return RedirectToAction(nameof(Index));
             }
@@ -135,12 +144,14 @@ namespace GoogleDocsClone.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var doc = await _documentsService.GetDocumentByIdAsync(id);
-            
+            var userId = GetCurrentUserId();
+
             if (doc != null)
             {
                 // SECURITY CHECK: Ensure the logged-in user owns this document!
-                if (doc.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                if (doc.UserId != userId)
                 {
+                    _logger.LogWarning("SECURITY: User {UserId} attempted to access/modify Document {DocumentId} which belongs to another user.", userId, id);
                     return Unauthorized(); // Or NotFound()
                 }
 
@@ -155,6 +166,11 @@ namespace GoogleDocsClone.Controllers
         {
             var doc = await _documentsService.GetDocumentByIdAsync(id);
             return doc != null;
+        }
+
+        private string GetCurrentUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
         }
     }
 }
