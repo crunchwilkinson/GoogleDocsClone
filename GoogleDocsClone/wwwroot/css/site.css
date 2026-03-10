@@ -914,12 +914,46 @@ button,
 }
 
 @media (max-width: 768px) {
+  .editor-page-layout {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .docs-hero-editor {
+    max-width: calc(100% - 2rem) !important;
+    padding: 1.2rem 1.25rem !important;
+    margin: 1rem auto 1rem auto !important;
+    border-radius: 12px;
+  }
+
+  .docs-hero-editor .docs-title {
+    font-size: 1.35rem;
+  }
+
+  .docs-hero-editor .docs-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .docs-hero-editor .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .docs-hero-editor .btn-editor-hero {
+    align-self: flex-start;
+  }
+
+  .editor-card {
+    border-radius: 12px;
+  }
+
   .editor-card-inner {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
 
   .editor-title-input {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
 
   .editor-content-input {
@@ -931,30 +965,68 @@ button,
     gap: 0.75rem;
   }
 
+  .editor-actions .btn-editor-danger {
+    margin-left: 0;
+  }
+
   .btn-editor-primary,
   .btn-editor-secondary,
   .btn-editor-danger {
     width: 100%;
+    text-align: center;
   }
 
-  .editor-card-inner {
-    padding: 2rem 1.5rem;
+  /* TinyMCE mobile overrides */
+  .tox-tinymce {
+    border-radius: 8px !important;
+  }
+
+  .tox .tox-toolbar__primary {
+    flex-wrap: wrap;
+  }
+
+  .editor-sidebar {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .editor-shell {
-    margin: 1rem auto;
+  .editor-page-layout {
     padding: 0 0.5rem;
   }
 
+  .docs-hero-editor {
+    max-width: calc(100% - 1rem) !important;
+    padding: 1rem !important;
+    border-radius: 10px;
+  }
+
+  .docs-hero-editor .docs-title {
+    font-size: 1.15rem;
+  }
+
+  .editor-shell {
+    margin: 0.5rem auto;
+    padding: 0;
+  }
+
   .editor-card-inner {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+
+  .editor-title-input {
+    font-size: 1.15rem;
   }
 
   .editor-content-input {
     min-height: 250px;
     font-size: 0.9rem;
+  }
+
+  .btn-editor-primary,
+  .btn-editor-danger {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -1530,6 +1602,12 @@ a.home-feature-card {
 #toast-container>.toast-success:hover {
   opacity: 1 !important;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.swal2-styled {
+    border-radius: 4px !important;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {

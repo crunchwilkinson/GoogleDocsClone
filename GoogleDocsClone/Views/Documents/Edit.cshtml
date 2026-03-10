@@ -29,13 +29,20 @@
                 </div>
 
                 <div class="editor-area-group mb-4">
-                    <textarea id="tiny" class="editor-content-input" asp-for="Content"></textarea>
-                    <span asp-validation-for="Content" class="text-danger"></span>
+                    <div id="editor-loader" class="py-5 text-center border rounded mb-2">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <p class="mt-2 text-muted">Loading Editor...</p>
+                    </div>
+
+                    <div id="editor-container" style="visibility: hidden; height: 0; opacity: 0; transition: opacity 0.3s ease;">
+                        <textarea id="tiny" class="editor-content-input" asp-for="Content"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
                 </div>
 
                 <div class="editor-actions">
-                    <input type="submit" value="Save Changes" class="btn btn-editor-primary" />
-                    <button type="submit" form="delete-form" class="btn btn-editor-danger">
+                    <input type="submit" value="Save Changes" class="btn btn-editor-primary" id="btn-submit" disabled />
+                    <button type="submit" form="delete-form" class="btn btn-editor-danger" id="btn-delete" disabled>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 6px;">
                             <polyline points="3 6 5 6 21 6">
                             </polyline>
@@ -44,7 +51,7 @@
                     </button>
                 </div>
             </form>
-            <form id="delete-form" asp-action="Delete" method="post" class="editor-delete-inline" onsubmit="return confirm('Are you sure you want to permanently delete this document?');">
+            <form id="delete-form" asp-action="Delete" method="post" class="editor-delete-inline">
                 <input type="hidden" asp-for="Id" />
             </form>
             
@@ -69,18 +76,46 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="https://cdn.tiny.cloud/1/lyd6jl029a6qoowdq0hs40f5485e8o40sr4c5v8babvar66n/tinymce/8/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
+        const isMobile = window.innerWidth <= 768;
         tinymce.init({
             selector: "textarea#tiny",
             plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
-            toolbar: "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
+            toolbar: isMobile
+                ? "undo redo | bold italic underline | bullist numlist | link image | removeformat"
+                : "undo redo | fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
             elementpath: false,
-            min_height: 500,
+            min_height: isMobile ? 300 : 500,
             skin: "oxide",
             content_css: "default",
-            toolbar_sticky: true,
+            toolbar_sticky: !isMobile,
             toolbar_sticky_offset: 56,
             body_class: "tinymce-body",
-            content_style: "body { font-family: 'Manrope', 'Segoe UI', sans-serif; font-size: 15px; color: #202124; line-height: 1.7; padding: 12px 16px; } p { margin: 0 0 0.8em 0; }"
+            content_style: "body { font-family: 'Manrope', 'Segoe UI', sans-serif; font-size: 15px; color: #202124; line-height: 1.7; padding: 12px 16px; } p { margin: 0 0 0.8em 0; }",
+
+            // This function runs once TinyMCE is fully loaded
+            init_instance_callback: function (editor) {
+                // Show the editor and hide the loader
+                document.getElementById('editor-loader').style.display = 'none';
+                
+                const container = document.getElementById('editor-container');
+                container.style.visibility = 'visible';
+                container.style.height = 'auto';
+                container.style.opacity = '1';
+                
+                // Enable the submit button
+                const submitBtn = document.getElementById('btn-submit');
+                const deleteBtn = document.getElementById('btn-delete');
+                submitBtn.disabled = false;
+                deleteBtn.disabled = false;
+            },
+
+            setup: function (editor) {
+                // Force TinyMCE to save content to the hidden textarea on every change
+                // This ensures C# validation and form submission work perfectly
+                editor.on('change', function () {
+                    tinymce.triggerSave();
+                });
+            }
         });
     </script>
 }

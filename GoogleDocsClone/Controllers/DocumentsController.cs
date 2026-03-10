@@ -145,6 +145,7 @@ namespace GoogleDocsClone.Controllers
                 }
 
                 await _documentsService.DeleteDocumentAsync(doc.Id, doc.UserId!);
+                TempData["SuccessMessage"] = "Document deleted successfully!";
             }
 
             return RedirectToAction(nameof(Index));
