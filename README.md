@@ -1,7 +1,7 @@
 # GoogleDocsClone
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![.NET Version](https://img.shields.io/badge/.NET-9.0-blueviolet.svg)
+![.NET Version](https://img.shields.io/badge/.NET-10.0-blueviolet.svg)
 [![CI/CD](https://img.shields.io/badge/Deploy-GitHub_Actions-2088FF?style=flat&logo=github-actions&logoColor=white)](https://github.com/features/actions)
 ![Database](https://img.shields.io/badge/Database-PostgreSQL-336791.svg?logo=postgresql&logoColor=white)
 
@@ -18,14 +18,14 @@ A centralized, web-based document editing system built with **ASP.NET Core MVC**
 
 ## 🛠️ Tech Stack
 
-* **Backend:** ASP.NET Core MVC 9.0 (C#)
+* **Backend:** ASP.NET Core MVC 10.0 (C#)
 * **Frontend:** HTML5, CSS3, JavaScript (Razor Pages)
 * **Database:** PostgreSQL (Entity Framework Core)
 * **DevOps:** GitHub Actions & Azure
 
 ## ⚙️ Getting Started
 **Prerequisites**
-* .NET 9.0 SDK
+* .NET 10.0 SDK
 * PostgreSQL
 * Visual Studio 2022 or VS Code
 
